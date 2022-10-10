@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signIn } from "next-auth/react";
@@ -17,6 +18,7 @@ const AuthForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { isLogin, handleAuth } = useDialog();
+  const router = useRouter();
 
   const {
     register,
@@ -44,6 +46,7 @@ const AuthForm = () => {
       : await registerUser(data);
 
     reset();
+    router.push("/profile");
   };
   return (
     <FormContainer>

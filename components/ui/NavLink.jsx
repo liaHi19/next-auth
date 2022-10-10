@@ -1,19 +1,27 @@
 import React from "react";
 import Link from "next/link";
-import { Typography, ListItem, ListItemButton } from "@mui/material";
+import { ListItem, ListItemButton, Button } from "@mui/material";
 
-const NavLink = ({ url, link, onClick }) => {
+const NavLink = ({ url, text, onClick, logOut }) => {
+  const styles = {
+    textTransform: "capitalize",
+    color: "white",
+    fontSize: "16px",
+    fontWeight: "medium",
+  };
   return (
     <ListItem>
-      <ListItemButton onClick={onClick}>
-        <Link href={url}>
-          <a>
-            <Typography variant="h6" sx={{ textTransform: "capitalize" }}>
-              {link}
-            </Typography>
-          </a>
-        </Link>
-      </ListItemButton>
+      {logOut ? (
+        <Button variant="text" onClick={logOut} sx={styles}>
+          {text}
+        </Button>
+      ) : (
+        <ListItemButton onClick={onClick}>
+          <Link href={url}>
+            <a style={styles}>{text}</a>
+          </Link>
+        </ListItemButton>
+      )}
     </ListItem>
   );
 };

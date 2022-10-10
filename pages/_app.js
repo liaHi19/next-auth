@@ -6,6 +6,7 @@ import { DialogProvider } from "../context/DialogContext";
 import Layout from "../components/layout/Layout";
 
 import "../styles/globals.css";
+import Auth from "../components/layout/Auth";
 
 function MyApp({ Component, pageProps, session }) {
   return (
@@ -20,8 +21,13 @@ function MyApp({ Component, pageProps, session }) {
               content="initial-scale=1.0, width=device-width"
             />
           </Head>
-
-          <Component {...pageProps} />
+          {Component.auth ? (
+            <Auth>
+              <Component {...pageProps} />
+            </Auth>
+          ) : (
+            <Component {...pageProps} />
+          )}
         </Layout>
       </DialogProvider>
     </SessionProvider>

@@ -5,3 +5,5 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+
+ProfilePage.auth = true;

@@ -12,6 +12,7 @@ export const DialogProvider = ({ children }) => {
   const handleAuth = () => {
     setIsLogin((prevState) => !prevState);
   };
+
   return (
     <DialogContext.Provider
       value={{
