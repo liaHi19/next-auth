@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { signIn } from "next-auth/react";
 
 import { Typography, Box } from "@mui/material";
 import { registerSchema, loginSchema } from "../../helpers/authSchema";
 import { useDialog } from "../../context/DialogContext";
+import { registerUser } from "../../axios/auth-functions";
 
 import FormContainer from "../ui/FormContainer";
 import Input from "../ui/Input";
@@ -34,8 +36,13 @@ const AuthForm = () => {
     setShowConfirmPassword((prevState) => !prevState);
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    delete data.confirmPassword;
+    isLogin
+      ? await signIn("credentials", { redirect: false, email, password })
+      : await registerUser(data);
+
     reset();
   };
   return (
